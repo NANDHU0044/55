@@ -12,7 +12,7 @@ t=0:1/1000:0.1;
 xt = 2*sin(w1*t)+3*sin(w2*t);
 figure(1); subplot(3,1,1)
 plot(t,xt)
-xlabel('t(s)'
+xlabel('t(s)')
 ylabel('x(t)')
 title('Continuous Time Signal')
 n=0:50;
@@ -36,8 +36,8 @@ powerSpectrum(64,150,xn2,2,3,4,7)
 powerSpectrum(1024,400,xn1,2,3,4,9)
 powerSpectrum(1024,150,xn2,2,3,4,11)
 
-
-Xf = powerSpectrum(N,fs,xn,fig,m,n,p)
+%power spectrum
+function Xf = powerSpectrum(N,fs,xn,fig,m,n,p)
  [Xw,Xp] = dtft(N,fs,xn,fig+1,m,n,p);
  m=3;
  n=2;
@@ -53,11 +53,12 @@ figure(fig);subplot(m,n,p)
  ylabel('|X(f)|^2')
  title(['Power Spectrum at ' num2str(N) 'samples and ' num2str(fs) 'Hz'])
 end
-dtft.m:
+
+%dtft
 function [Xw,Xp] = dtft(N,fs,xn,fig,m,n,p) 
 [Xmag,Xphase] = dft(N,fs,xn,fig+1,m,n,p);
  w=(-N/2:N/2-1)*2*pi/N;
- Xw=fftshift(Xmag); % non-centered to centered
+ Xw=fftshift(Xmag); 
  Xp = fftshift(Xphase);
  
  figure(fig);subplot(m,n,p)
@@ -88,4 +89,4 @@ stem(k,Xphase)
 xlabel('k(No. of Samples)')
 ylabel('<X(k)')
 title(['Phase of DFT at ', num2str(N) ,'samples and ', num2str(fs),'Hz'])
-
+end
