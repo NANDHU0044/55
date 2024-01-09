@@ -16,6 +16,9 @@ w3 = m3/fs;
 
 wpn = [(w2-0.5)/pi,(w2+0.5)/pi]; % [681Hz,1318Hz]
 wsn = [(w1+0.37)/pi,(w3-0.2)/pi]; % [635Hz,1372Hz]
+% wpn = w1/pi;
+% wsn = w2/pi;
+
 
 Rp = 1; 
 Rs = 60;
@@ -24,6 +27,8 @@ fsb= 20000;
 wpn1 = w3/pi; 
 wsn1 = w2/pi; 
 
+% [N,Wn] = buttord(wpn,wsn,Rp,Rs);
+% [b,a] = butter(N,Wn);
 
 [N,Wp]= cheb1ord(wpn1,wsn1,Rp,Rs);
 [b,a]= cheby1(N,Rp,Wp,'high');
